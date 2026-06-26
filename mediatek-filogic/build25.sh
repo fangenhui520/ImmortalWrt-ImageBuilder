@@ -1,39 +1,39 @@
 #!/bin/bash
-source shell/apk-custom-packages.sh
+源 shell/apk-custom-packages.sh
 #echo "✅ 你选择了第三方软件包：$CUSTOM_PACKAGES"
-if [ -z "$CUSTOM_PACKAGES" ]; then
-  echo "⚪️ 未选择 任何第三方软件包"
-else
-  # ============= 同步第三方插件库==============
-  # 同步第三方软件仓库run/apk
-  echo "🔄 正在同步第三方软件仓库 Cloning apk file repo..."
-  git clone --depth=1 https://github.com/wukongdaily/apk.git /tmp/store-apk-repo
+if [ -z "$CUSTOM_PACKAGES" ]; then [ -z "$CUSTOM_PACKAGES" ]; then
+  echo "⚪️ 未选择任何第三方软件包""⚪️ 未选择 任何第三方软件包"
+否则
+  # ============= 同步第三方插件库==============# ============= 同步第三方插件库==============
+  # 同步第三方软件仓库run/apk# 同步第三方软件仓库run/apk
+  echo "🔄 正在同步第三方软件仓库 Cloning apk file repo...""🔄 正在同步第三方软件仓库 Cloning apk file repo..."
+  git clone --depth=1 https://github.com/wukongdaily/apk.git /tmp/store-apk-repo--depth=1 https://github.com/wukongdaily/apk.git /tmp/store-apk-repo
 
-  # 拷贝 run/arm64 下所有 run 文件和apk文件 到 extra-packages 目录
-  mkdir -p /home/build/immortalwrt/extra-packages
-  cp -r /tmp/store-apk-repo/run/arm64-a53/* /home/build/immortalwrt/extra-packages/
+  # 拷贝 run/arm64 下所有 run 文件和apk文件 到 extra-packages 目录# 拷贝 run/arm64 下所有 run 文件和apk文件 到 extra-packages 目录
+  mkdir -p /home/build/immortalwrt/extra-packages-p /home/build/immortalwrt/extra-packages
+  cp -r /tmp/store-apk-repo/run/arm64-a53/* /home/build/immortalwrt/extra-packages/-r /tmp/store-apk-repo/run/arm64-a53/* /home/build/immortalwrt/extra-packages/
 
-  echo "✅ Run files copied to extra-packages:"
-  # 解压并拷贝apk到packages目录
+  回显 "✅ 运行文件已复制到额外的软件包：""✅ Run files copied to extra-packages:"
+  # 解压并拷贝apk到packages目录# 解压并拷贝apk到packages目录
   sh shell/apk-prepare-packages.sh
-  ls -lah /home/build/immortalwrt/packages/
-fi
+  ls -lah /home/build/immortalwrt/packages/-lah /home/build/immortalwrt/packages/
+输入：fi
 
 
 
 # yml 传入的路由器型号 PROFILE
-echo "Building for profile: $PROFILE"
+echo "正在为配置文件 $PROFILE 编译""Building for profile: $PROFILE"
 
-echo "Include Docker: $INCLUDE_DOCKER"
-echo "Create pppoe-settings"
-mkdir -p  /home/build/immortalwrt/files/etc/config
+回显 "包含Docker: $INCLUDE_DOCKER""Include Docker: $INCLUDE_DOCKER"
+回显 "创建pppoe设置""Create pppoe-settings"
+mkdir -p  /home/build/immortalwrt/files/etc/config-p  /home/build/immortalwrt/files/etc/config
 
 # 创建pppoe配置文件 yml传入pppoe变量————>pppoe-settings文件
-cat << EOF > /home/build/immortalwrt/files/etc/config/pppoe-settings
-enable_pppoe=${ENABLE_PPPOE}
+cat << EOF > /home/build/immortalwrt/files/etc/config/pppoe-settings<< EOF > /home/build/immortalwrt/files/etc/config/pppoe-settings
+启用PPPOE=${启用PPPOE}
 pppoe_account=${PPPOE_ACCOUNT}
 pppoe_password=${PPPOE_PASSWORD}
-EOF
+文件结束
 
 echo "cat pppoe-settings"
 cat /home/build/immortalwrt/files/etc/config/pppoe-settings
@@ -46,17 +46,23 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting build process..."
 PACKAGES=""
 PACKAGES="$PACKAGES curl luci luci-i18n-base-zh-cn"
 PACKAGES="$PACKAGES luci-i18n-firewall-zh-cn"
-PACKAGES="$PACKAGES luci-theme-argon"
-PACKAGES="$PACKAGES luci-app-argon-config"
-PACKAGES="$PACKAGES luci-i18n-argon-config-zh-cn"
-PACKAGES="$PACKAGES luci-i18n-diskman-zh-cn"
-PACKAGES="$PACKAGES luci-i18n-package-manager-zh-cn"
-PACKAGES="$PACKAGES luci-i18n-ttyd-zh-cn"
-PACKAGES="$PACKAGES openssh-sftp-server"
-# 文件管理器
-PACKAGES="$PACKAGES luci-i18n-filemanager-zh-cn"
-# 暂时去除 quickstart 因为目前暂时没有 aarch64_cortex-a53 架构的apk
-PACKAGES="$PACKAGES -luci-i18n-quickstart-zh-cn"
+PACKAGES="$PACKAGES luci-i18n-aria2-zh-cn"
+PACKAGES="$PACKAGES luci-app-upnp"
+PACKAGES="$PACKAGES luci-app-vsftpd"
+PACKAGES="$PACKAGES luci-i18n-ddns-zh-cn"
+PACKAGES="$PACKAGES luci-i18n-passwall-zh-cn"
+PACKAGES="$PACKAGES luci-i18n-natmap-zh-cn"
+PACKAGES="$PACKAGES luci-i18n-usb-printer-zh-cn"
+
+PACKAGES="$PACKAGES kmod-usb-core"
+PACKAGES="$PACKAGES kmod-usb-storage"
+PACKAGES="$PACKAGES kmod-usb-storage-extras"
+PACKAGES="$PACKAGES kmod-usb2"
+PACKAGES="$PACKAGES kmod-usb-xhci-mtk"
+PACKAGES="$PACKAGES kmod-fs-exfat"
+PACKAGES="$PACKAGES kmod-fs-ext4"
+PACKAGES="$PACKAGES kmod-fs-vfat"
+PACKAGES="$PACKAGES ddns-scripts-cloudflare"
 
 
 # 第三方软件包 合并
