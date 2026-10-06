@@ -583,7 +583,7 @@ jobs:
           mt7621_models=$(cat model/mt7621.txt | tr '\n' '|')
           mt7621_models=${mt7621_models%|}
           if [[ "$profile" =~ ^($mt7621_models)$ ]]; then
-              case_tag="ramips-mt7621-openwrt-25.12.2"
+              case_tag="ramips-mt7621-openwrt-25.12-SNAPSHOT"
               case_platform="ramips/mt7621"
           fi
 
